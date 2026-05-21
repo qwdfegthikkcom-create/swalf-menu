@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SWALF - Rest & Café | سوالف</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Cinzel:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C97B3C;          /* لون اللوغو البرتقالي النحاسي */
+  --gold-dark:#9B5A28;
+  --black:#0E0E0E;
+  --cream:#FAF6F1;
+  --gray:#7A7A7A;
+  --shadow:0 8px 30px rgba(0,0,0,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:var(--cream);color:var(--black);min-height:100vh}
+
+/* ========== شاشة البداية (Splash) ========== */
+.splash{
+  position:fixed;inset:0;background:linear-gradient(135deg,#f5e6d3 0%,#e8d4ba 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;
+  transition:opacity .6s, visibility .6s;
+}
+.splash.hide{opacity:0;visibility:hidden}
+.logo-circle{
+  width:240px;height:240px;border-radius:50%;background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 20px 60px rgba(201,123,60,.4);
+  cursor:pointer;animation:pulse 2.5s infinite;
+  user-select:none;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.04)}
+}
+.logo-circle svg{width:55%;height:55%}
+.splash-title{margin-top:30px;font-family:'Cinzel',serif;font-size:28px;letter-spacing:8px;color:var(--gold-dark)}
+.splash-sub{margin-top:8px;font-size:14px;color:var(--gray);letter-spacing:3px}
+.enter-btn{
+  margin-top:40px;padding:14px 50px;background:var(--black);color:#fff;border:none;border-radius:50px;
+  font-size:16px;font-weight:700;cursor:pointer;font-family:'Cairo';
+  transition:.3s;
+}
+.enter-btn:hover{background:var(--gold);transform:translateY(-2px)}
+
+/* ========== الهيدر ========== */
+.header{
+  position:sticky;top:0;background:#fff;z-index:100;
+  box-shadow:0 2px 15px rgba(0,0,0,.08);padding:12px 0;
+}
+.header-top{display:flex;align-items:center;justify-content:center;padding:0 20px 12px;border-bottom:1px solid #f0e8dd}
+.mini-logo{width:50px;height:50px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center}
+.mini-logo svg{width:60%;height:60%}
+.brand{margin-right:12px}
+.brand h1{font-family:'Cinzel',serif;font-size:18px;letter-spacing:4px;color:var(--gold-dark)}
+.brand p{font-size:10px;color:var(--gray);letter-spacing:2px}
+
+/* ========== شريط الأقسام ========== */
+.nav-categories{
+  display:flex;gap:10px;padding:14px 16px;overflow-x:auto;scrollbar-width:none;
+}
+.nav-categories::-webkit-scrollbar{display:none}
+.cat-btn{
+  flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:6px;
+  cursor:pointer;padding:4px;transition:.3s;
+}
+.cat-icon{
+  width:58px;height:58px;border-radius:50%;background:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;
+  box-shadow:0 4px 12px rgba(201,123,60,.3);transition:.3s;
+}
+.cat-btn.active .cat-icon{background:var(--black);transform:scale(1.08)}
+.cat-btn span{font-size:11px;font-weight:700;color:var(--black);white-space:nowrap}
+
+/* ========== شبكة الأصناف ========== */
+.section-title{
+  padding:24px 20px 12px;font-size:20px;font-weight:900;color:var(--gold-dark);
+  display:flex;align-items:center;gap:10px;
+}
+.section-title::before{content:'';width:5px;height:24px;background:var(--gold);border-radius:3px}
+
+.menu-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 16px 30px;
+}
+@media(min-width:768px){.menu-grid{grid-template-columns:repeat(3,1fr);gap:18px}}
+@media(min-width:1024px){.menu-grid{grid-template-columns:repeat(4,1fr);max-width:1200px;margin:0 auto}}
+
+.card{
+  background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+  transition:.3s;position:relative;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(0,0,0,.15)}
+.card.out{opacity:.5;filter:grayscale(.7)}
+.card-img{width:100%;height:140px;object-fit:cover;background:#f0e8dd}
+.card-body{padding:12px}
+.card-name{font-size:14px;font-weight:700;color:var(--black);margin-bottom:4px;line-height:1.3;min-height:36px}
+.card-desc{font-size:11px;color:var(--gray);margin-bottom:10px;min-height:28px}
+.card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.price{font-size:15px;font-weight:900;color:var(--gold-dark)}
+.price small{font-size:10px;color:var(--gray);font-weight:400}
+.add-btn{
+  width:34px;height:34px;border-radius:50%;background:var(--gold);color:#fff;
+  border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:.2s;
+}
+.add-btn:active{transform:scale(.85);background:var(--black)}
+.out-badge{position:absolute;top:10px;left:10px;background:#d33;color:#fff;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700}
+
+/* ========== الفوتر ========== */
+.footer{background:var(--black);color:#fff;text-align:center;padding:30px 20px;margin-top:40px}
+.footer p{font-size:12px;opacity:.7;margin-top:8px}
+
+/* ========== لوحة الأدمن ========== */
+.admin-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:10000;
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.admin-overlay.show{display:flex}
+.pin-box{
+  background:#fff;border-radius:20px;padding:30px;width:100%;max-width:340px;text-align:center;
+}
+.pin-box h3{color:var(--gold-dark);margin-bottom:20px}
+.pin-box input{
+  width:100%;padding:14px;border:2px solid #e0d4c0;border-radius:12px;font-size:18px;
+  text-align:center;letter-spacing:8px;font-weight:700;margin-bottom:14px;
+}
+.pin-box input:focus{outline:none;border-color:var(--gold)}
+.pin-box button{
+  width:100%;padding:13px;background:var(--gold);color:#fff;border:none;border-radius:12px;
+  font-size:15px;font-weight:700;cursor:pointer;
+}
+.pin-box .cancel{background:#eee;color:#666;margin-top:8px}
+
+.admin-panel{
+  position:fixed;inset:0;background:#fff;z-index:10001;overflow-y:auto;display:none;
+}
+.admin-panel.show{display:block}
+.admin-header{
+  background:var(--black);color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;
+  position:sticky;top:0;z-index:5;
+}
+.admin-header h2{font-size:18px;color:var(--gold)}
+.close-admin{background:#d33;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:700}
+.admin-list{padding:20px;max-width:900px;margin:0 auto}
+.admin-item{
+  background:#faf6f1;border:1px solid #ebe0cf;border-radius:12px;padding:14px;margin-bottom:12px;
+  display:grid;grid-template-columns:60px 1fr auto auto auto;gap:12px;align-items:center;
+}
+.admin-item img{width:60px;height:60px;border-radius:10px;object-fit:cover}
+.admin-item .info{font-size:13px;font-weight:700}
+.admin-item .info small{display:block;color:var(--gray);font-weight:400;font-size:11px}
+.admin-item input[type=number]{width:90px;padding:8px;border:1px solid #ddd;border-radius:8px;text-align:center;font-weight:700}
+.toggle{position:relative;width:50px;height:26px;background:#ccc;border-radius:13px;cursor:pointer;transition:.3s}
+.toggle.on{background:#22c55e}
+.toggle::after{content:'';position:absolute;top:3px;right:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.3s}
+.toggle.on::after{right:27px}
+.save-all{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:var(--gold);color:#fff;border:none;padding:14px 40px;border-radius:50px;
+  font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 25px rgba(201,123,60,.5);
+}
+.toast{
+  position:fixed;bottom:90px;left:50%;transform:translateX(-50%);
+  background:#22c55e;color:#fff;padding:12px 24px;border-radius:30px;font-weight:700;
+  opacity:0;transition:.3s;z-index:99999;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-10px)}
+
+@media(max-width:600px){
+  .admin-item{grid-template-columns:50px 1fr;gap:8px}
+  .admin-item img{width:50px;height:50px}
+  .admin-item > *:nth-child(n+3){grid-column:span 2}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== شاشة البداية ========== -->
+<div class="splash" id="splash">
+  <div class="logo-circle" id="logoTrigger" title="اللوغو السري">
+    <!-- لوغو SWALF SVG -->
+    <svg viewBox="0 0 200 200" fill="#0E0E0E">
+      <path d="M40 140 L40 70 Q40 40 55 40 Q60 40 60 50 L60 140 Z"/>
+      <path d="M68 140 L68 60 Q68 35 78 35 Q83 35 83 45 L83 140 Z"/>
+      <path d="M91 140 L91 50 Q91 25 100 25 Q109 25 109 50 L109 140 Z"/>
+      <path d="M117 140 L117 45 Q117 35 122 35 Q132 35 132 60 L132 140 Z"/>
+      <path d="M140 140 L140 50 Q140 40 145 40 Q160 40 160 70 L160 140 Z"/>
+      <text x="100" y="170" text-anchor="middle" font-family="Cinzel" font-size="20" font-weight="bold" fill="#0E0E0E">SWALF</text>
+      <text x="100" y="185" text-anchor="middle" font-family="Cinzel" font-size="8" fill="#0E0E0E">REST &amp; CAFÉ</text>
+    </svg>
+  </div>
+  <div class="splash-title">SWALF</div>
+  <div class="splash-sub">REST &amp; CAFÉ</div>
+  <button class="enter-btn" onclick="enterMenu()">عرض المنيو</button>
+</div>
+
+<!-- ========== الهيدر ========== -->
+<header class="header">
+  <div class="header-top">
+    <div class="mini-logo">
+      <svg viewBox="0 0 200 200" fill="#0E0E0E">
+        <path d="M40 140 L40 70 Q40 40 55 40 Q60 40 60 50 L60 140 Z"/>
+        <path d="M68 140 L68 60 Q68 35 78 35 Q83 35 83 45 L83 140 Z"/>
+        <path d="M91 140 L91 50 Q91 25 100 25 Q109 25 109 50 L109 140 Z"/>
+        <path d="M117 140 L117 45 Q117 35 122 35 Q132 35 132 60 L132 140 Z"/>
+        <path d="M140 140 L140 50 Q140 40 145 40 Q160 40 160 70 L160 140 Z"/>
+      </svg>
+    </div>
+    <div class="brand">
+      <h1>SWALF</h1>
+      <p>REST &amp; CAFÉ</p>
+    </div>
+  </div>
+  <nav class="nav-categories" id="navCats"></nav>
+</header>
+
+<!-- ========== محتوى المنيو ========== -->
+<main id="menuContent"></main>
+
+<footer class="footer">
+  <div style="font-family:'Cinzel',serif;letter-spacing:6px;color:var(--gold);font-size:18px">SWALF</div>
+  <p>© 2024 سوالف ريست آند كافيه - جميع الحقوق محفوظة</p>
+</footer>
+
+<!-- ========== مودال الـ PIN ========== -->
+<div class="admin-overlay" id="pinModal">
+  <div class="pin-box">
+    <h3>🔐 دخول لوحة المدير</h3>
+    <input type="password" id="pinInput" maxlength="6" placeholder="••••">
+    <button onclick="checkPin()">دخول</button>
+    <button class="cancel" onclick="closePinModal()">إلغاء</button>
+  </div>
+</div>
+
+<!-- ========== لوحة الأدمن ========== -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-header">
+    <h2>⚙️ لوحة تحكم المدير</h2>
+    <button class="close-admin" onclick="closeAdmin()">إغلاق ✕</button>
+  </div>
+  <div class="admin-list" id="adminList"></div>
+  <button class="save-all" onclick="saveAll()">💾 حفظ كل التعديلات</button>
+</div>
+
+<div class="toast" id="toast">تم الحفظ ✓</div>
+
+<script>
+/* ========== قاعدة بيانات الأصناف ========== */
+const DEFAULT_DATA = {
+  categories:[
+    {id:'iraqi', name:'الأطباق العراقية', icon:'🍛'},
+    {id:'grills', name:'المشويات', icon:'🍢'},
+    {id:'world', name:'الأطباق العالمية', icon:'🌍'},
+    {id:'appet', name:'المقبلات والشوربات', icon:'🥣'},
+    {id:'pizza', name:'البيتزا والباستا', icon:'🍕'},
+    {id:'sweets', name:'الحلويات', icon:'🍰'},
+    {id:'cold', name:'مشروبات باردة', icon:'🥤'},
+    {id:'hot', name:'مشروبات ساخنة', icon:'☕'}
+  ],
+  items:[
+    // الأطباق العراقية
+    {id:1, cat:'iraqi', name:'دولمة عراقية', desc:'ورق عنب وخضار محشية', price:12000, img:'https://images.unsplash.com/photo-1625944525533-473f1b3d9684?w=400', on:true},
+    {id:2, cat:'iraqi', name:'قوزي عراقي', desc:'لحم خروف مع تمن بهارات', price:25000, img:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400', on:true},
+    {id:3, cat:'iraqi', name:'تشريب باگلة', desc:'تشريب تقليدي مع لحم', price:10000, img:'https://images.unsplash.com/photo-1547592180-85f173990554?w=400', on:true},
+    {id:4, cat:'iraqi', name:'بامية بلحم', desc:'بامية مع تمن أبيض', price:11000, img:'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400', on:true},
+
+    // المشويات
+    {id:5, cat:'grills', name:'تكة لحم', desc:'لحم غنم مشوي على الفحم', price:18000, img:'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400', on:true},
+    {id:6, cat:'grills', name:'كباب عراقي', desc:'كباب لحم مفروم بهارات خاصة', price:15000, img:'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400', on:true},
+    {id:7, cat:'grills', name:'شيش طاووق', desc:'دجاج متبل ومشوي', price:13000, img:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400', on:true},
+    {id:8, cat:'grills', name:'مشاوي مشكلة', desc:'تشكيلة مشاوي مع رز', price:30000, img:'https://images.unsplash.com/photo-1544025162-d76694265947?w=400', on:true},
+
+    // الأطباق العالمية
+    {id:9, cat:'world', name:'برغر لحم بريميوم', desc:'لحم 200غ مع جبن شيدر', price:14000, img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400', on:true},
+    {id:10, cat:'world', name:'ستيك ريب آي', desc:'ستيك مع بطاطا وخضار', price:35000, img:'https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=400', on:true},
+    {id:11, cat:'world', name:'دجاج كريسبي', desc:'قطع دجاج مقرمشة', price:12000, img:'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f9e?w=400', on:true},
+
+    // المقبلات والشوربات
+    {id:12, cat:'appet', name:'حمص بالطحينة', desc:'حمص كريمي مع زيت زيتون', price:5000, img:'https://images.unsplash.com/photo-1577805947697-89e18249d767?w=400', on:true},
+    {id:13, cat:'appet', name:'متبل باذنجان', desc:'باذنجان مدخن', price:5000, img:'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=400', on:true},
+    {id:14, cat:'appet', name:'شوربة عدس', desc:'شوربة عدس ساخنة', price:4000, img:'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400', on:true},
+    {id:15, cat:'appet', name:'فتوش', desc:'سلطة لبنانية منعشة', price:6000, img:'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400', on:true},
+
+    // البيتزا والباستا
+    {id:16, cat:'pizza', name:'بيتزا مارجريتا', desc:'طماطم وجبنة موزاريلا', price:12000, img:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400', on:true},
+    {id:17, cat:'pizza', name:'بيتزا بيبروني', desc:'بيبروني وجبنة', price:14000, img:'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400', on:true},
+    {id:18, cat:'pizza', name:'باستا الفريدو', desc:'باستا كريمية بالدجاج', price:13000, img:'https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=400', on:true},
+    {id:19, cat:'pizza', name:'لازانيا', desc:'لازانيا بلحم وجبن', price:15000, img:'https://images.unsplash.com/photo-1619895092538-128f4d1a1b4d?w=400', on:true},
+
+    // الحلويات
+    {id:20, cat:'sweets', name:'كنافة بالجبن', desc:'كنافة طازجة بالقشطة', price:7000, img:'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=400', on:true},
+    {id:21, cat:'sweets', name:'تشيز كيك', desc:'تشيز كيك بالفراولة', price:8000, img:'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400', on:true},
+    {id:22, cat:'sweets', name:'براوني بالشوكولاتة', desc:'براوني ساخن مع آيس كريم', price:8000, img:'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400', on:true},
+    {id:23, cat:'sweets', name:'بقلاوة', desc:'بقلاوة بالفستق', price:6000, img:'https://images.unsplash.com/photo-1598110750624-207050c4f28c?w=400', on:true},
+
+    // مشروبات باردة
+    {id:24, cat:'cold', name:'موهيتو فراولة', desc:'منعش بالنعناع', price:6000, img:'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=400', on:true},
+    {id:25, cat:'cold', name:'آيس كوفي', desc:'قهوة مثلجة', price:5000, img:'https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=400', on:true},
+    {id:26, cat:'cold', name:'عصير ليمون نعناع', desc:'طازج 100%', price:4000, img:'https://images.unsplash.com/photo-1556881286-fc6915169721?w=400', on:true},
+    {id:27, cat:'cold', name:'ميلك شيك شوكولاتة', desc:'كريمي وغني', price:6000, img:'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400', on:true},
+
+    // مشروبات ساخنة
+    {id:28, cat:'hot', name:'قهوة عربية', desc:'قهوة عربية بالهيل', price:3000, img:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400', on:true},
+    {id:29, cat:'hot', name:'كابتشينو', desc:'إيطالي أصلي', price:5000, img:'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400', on:true},
+    {id:30, cat:'hot', name:'شاي عراقي', desc:'استكان شاي عراقي', price:1500, img:'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=400', on:true},
+    {id:31, cat:'hot', name:'لاتيه', desc:'لاتيه كريمي', price:5000, img:'https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=400', on:true}
+  ]
+};
+
+const ADMIN_PIN = '4444'; // يمكنك تغييره هنا
+
+/* ========== التحميل والحفظ ========== */
+let DATA = JSON.parse(localStorage.getItem('swalfMenu')) || DEFAULT_DATA;
+function saveData(){localStorage.setItem('swalfMenu', JSON.stringify(DATA))}
+
+/* ========== شاشة البداية + اللوغو السري ========== */
+let clickCount=0, clickTimer;
+document.getElementById('logoTrigger').addEventListener('click', ()=>{
+  clickCount++;
+  clearTimeout(clickTimer);
+  clickTimer = setTimeout(()=>clickCount=0, 1500);
+  if(clickCount>=5){
+    clickCount=0;
+    openPinModal();
+  }
+});
+
+function enterMenu(){
+  document.getElementById('splash').classList.add('hide');
+  renderMenu();
+}
+
+/* ========== PIN ========== */
+function openPinModal(){
+  document.getElementById('pinModal').classList.add('show');
+  document.getElementById('pinInput').value='';
+  setTimeout(()=>document.getElementById('pinInput').focus(),100);
+}
+function closePinModal(){document.getElementById('pinModal').classList.remove('show')}
+function checkPin(){
+  if(document.getElementById('pinInput').value===ADMIN_PIN){
+    closePinModal();
+    openAdmin();
+  } else {
+    alert('❌ كلمة المرور خاطئة');
+  }
+}
+document.getElementById('pinInput').addEventListener('keypress',e=>{if(e.key==='Enter')checkPin()});
+
+/* ========== رسم المنيو ========== */
+function renderMenu(){
+  // الأقسام
+  const nav = document.getElementById('navCats');
+  nav.innerHTML = DATA.categories.map((c,i)=>
+    `<div class="cat-btn ${i===0?'active':''}" data-cat="${c.id}" onclick="scrollToCat('${c.id}',this)">
+      <div class="cat-icon">${c.icon}</div>
+      <span>${c.name}</span>
+    </div>`
+  ).join('');
+
+  // المحتوى
+  const main = document.getElementById('menuContent');
+  main.innerHTML = DATA.categories.map(c=>{
+    const items = DATA.items.filter(i=>i.cat===c.id);
+    if(!items.length) return '';
+    return `
+      <section id="sec-${c.id}">
+        <h2 class="section-title">${c.icon} ${c.name}</h2>
+        <div class="menu-grid">
+          ${items.map(it=>`
+            <div class="card ${!it.on?'out':''}">
+              ${!it.on?'<div class="out-badge">نفذت الكمية</div>':''}
+              <img class="card-img" src="${it.img}" alt="${it.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/C97B3C/ffffff?text=SWALF'">
+              <div class="card-body">
+                <div class="card-name">${it.name}</div>
+                <div class="card-desc">${it.desc||''}</div>
+                <div class="card-footer">
+                  <button class="add-btn" ${!it.on?'disabled':''}>+</button>
+                  <div class="price">${it.price.toLocaleString()} <small>د.ع</small></div>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </section>
+    `;
+  }).join('');
+}
+
+function scrollToCat(id, el){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  const target = document.getElementById('sec-'+id);
+  if(target){
+    const top = target.getBoundingClientRect().top + window.pageYOffset - 180;
+    window.scrollTo({top, behavior:'smooth'});
+  }
+}
+
+/* ========== لوحة الأدمن ========== */
+function openAdmin(){
+  document.getElementById('adminPanel').classList.add('show');
+  const list = document.getElementById('adminList');
+  list.innerHTML = DATA.items.map(it=>`
+    <div class="admin-item">
+      <img src="${it.img}" onerror="this.src='https://via.placeholder.com/60'">
+      <div class="info">${it.name}<small>${DATA.categories.find(c=>c.id===it.cat)?.name||''}</small></div>
+      <input type="number" value="${it.price}" data-id="${it.id}" data-field="price">
+      <div class="toggle ${it.on?'on':''}" data-id="${it.id}" onclick="this.classList.toggle('on')"></div>
+      <input type="text" placeholder="رابط صورة جديد" data-id="${it.id}" data-field="img" style="width:140px;padding:8px;border:1px solid #ddd;border-radius:8px;font-size:11px">
+    </div>
+  `).join('');
+}
+function closeAdmin(){document.getElementById('adminPanel').classList.remove('show')}
+
+function saveAll(){
+  document.querySelectorAll('.admin-item').forEach(row=>{
+    const priceInput = row.querySelector('input[data-field="price"]');
+    const imgInput = row.querySelector('input[data-field="img"]');
+    const toggle = row.querySelector('.toggle');
+    const id = parseInt(priceInput.dataset.id);
+    const item = DATA.items.find(i=>i.id===id);
+    if(item){
+      item.price = parseInt(priceInput.value)||0;
+      if(imgInput.value.trim()) item.img = imgInput.value.trim();
+      item.on = toggle.classList.contains('on');
+    }
+  });
+  saveData();
+  renderMenu();
+  showToast('✓ تم حفظ كل التعديلات');
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+// تشغيل المنيو عند تحميل الصفحة
+window.addEventListener('load', renderMenu);
+</script>
+</body>
+</html>
