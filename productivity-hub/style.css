@@ -1,0 +1,514 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 16px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.tab-btn.active {
+  background: rgba(255,255,255,0.95);
+  color: #667eea;
+  font-weight: 700;
+}
+
+/* Main */
+main {
+  flex: 1;
+  padding: 20px 0;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Card */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+/* Input Row */
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.input-row input,
+.input-row select {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-row input:focus,
+.input-row select:focus {
+  border-color: #667eea;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  margin-bottom: 12px;
+}
+
+textarea:focus {
+  border-color: #667eea;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background: #e8e8e8;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #ddd;
+}
+
+.btn-small {
+  background: #667eea;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: opacity 0.2s;
+}
+
+.btn-small:hover {
+  opacity: 0.85;
+}
+
+.btn-danger {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: opacity 0.2s;
+}
+
+.btn-danger:hover {
+  opacity: 0.85;
+}
+
+/* ====== To-Do ====== */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  transition: background 0.2s;
+}
+
+.todo-item:hover {
+  background: #f0f2f5;
+}
+
+.todo-item.done {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.todo-check {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #667eea;
+}
+
+.todo-text {
+  flex: 1;
+  word-break: break-word;
+}
+
+.todo-priority {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.todo-priority.high { background: #ffe0e0; color: #c0392b; }
+.todo-priority.medium { background: #fff3cd; color: #856404; }
+.todo-priority.low { background: #d4edda; color: #155724; }
+
+.todo-delete {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+
+.todo-delete:hover {
+  color: #e74c3c;
+}
+
+.todo-empty {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+}
+
+/* ====== Pomodoro ====== */
+.pomodoro-card {
+  text-align: center;
+}
+
+.pomodoro-display {
+  margin: 20px 0;
+}
+
+.pomodoro-timer {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #667eea;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 4px;
+}
+
+.pomodoro-label {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 8px;
+}
+
+.pomodoro-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.pomodoro-settings {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.pomodoro-settings label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.pomodoro-settings input {
+  width: 60px;
+  padding: 6px 8px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* ====== Notes ====== */
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.note-item {
+  background: #f8f9fa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.note-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+}
+
+.note-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.note-content {
+  color: #555;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.note-date {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 6px;
+}
+
+.note-edit-input {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #667eea;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.note-edit-textarea {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #667eea;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  resize: vertical;
+  margin-bottom: 6px;
+}
+
+.notes-empty {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+}
+
+/* ====== Habits ====== */
+.habit-stats {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: #f0f8ff;
+  border-radius: 8px;
+}
+
+.habits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.habit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.habit-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.habit-check {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #667eea;
+}
+
+.habit-streak {
+  font-size: 0.8rem;
+  color: #667eea;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+}
+
+.habit-delete {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.habit-delete:hover {
+  color: #e74c3c;
+}
+
+.habits-empty {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+}
+
+/* Ad Banner */
+.ad-banner {
+  margin: 12px 0;
+  min-height: 90px;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Footer */
+footer {
+  background: #1a1a2e;
+  color: #aaa;
+  text-align: center;
+  padding: 16px 0;
+  font-size: 0.85rem;
+  margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+  .tab-btn {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+  .pomodoro-timer {
+    font-size: 3rem;
+  }
+  .input-row {
+    flex-direction: column;
+  }
+  .input-row input,
+  .input-row select {
+    min-width: unset;
+  }
+}
