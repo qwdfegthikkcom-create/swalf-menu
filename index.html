@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#1B080D">
 <meta property="og:title" content="ليالي الموصل · المنيو">
 <meta property="og:description" content="مشاوي على الفحم، شاورما، وحلويات موصلية. اطلب من طاولتك.">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/qwdfegthikkcom-create/swalf-menu@layali-mosul/img/hero.webp">
+<meta property="og:image" content="img/hero.webp">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Cpath d='M0 125V46C0 24 22 10 50 0C78 10 100 24 100 46V125Z' fill='%23C9A45C'/%3E%3C/svg%3E">
 <style>html{background:#1B080D}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 <title>ليالي الموصل · المنيو</title>
@@ -462,7 +462,7 @@ body[data-mode="split"] .col{display:block}
 <div data-view="menu" class="phone" id="phone">
  <div class="phone-scroll" id="menuScroll">
   <header class="hero">
-    <img src="https://cdn.jsdelivr.net/gh/qwdfegthikkcom-create/swalf-menu@layali-mosul/img/hero.webp" alt="قاعة المطعم بأقواسها ونوافذها الكبيرة" fetchpriority="high">
+    <img src="img/hero.webp" alt="قاعة المطعم بأقواسها ونوافذها الكبيرة" fetchpriority="high">
     <div class="wrap hero-inner">
       <div class="eyebrow">مطبخ موصلي · الموصل، العراق</div>
       <h1 class="brand">ليالي الموصل</h1>
@@ -740,7 +740,7 @@ menu.innerHTML = MENU.map(s=>{
 function itemCard(it,idx){
   const p = it.sizes ? `<span class="from">يبدأ من</span>${new Intl.NumberFormat('en-US').format(it.sizes[0][1])}<small>د.ع</small>` : `${new Intl.NumberFormat('en-US').format(it.price)}<small>د.ع</small>`;
   return `<div class="item reveal" role="button" tabindex="0" data-open="${it.id}" data-s="${norm(it.name+' '+it.desc)}" style="animation-delay:${Math.min(idx,6)*55}ms">
-    <div class="arch"><div class="ph"><img src="https://cdn.jsdelivr.net/gh/qwdfegthikkcom-create/swalf-menu@layali-mosul/img/${it.img}.webp" alt="${it.name}" loading="lazy"></div></div>
+    <div class="arch"><div class="ph"><img src="img/${it.img}.webp" alt="${it.name}" loading="lazy"></div></div>
     <div class="body"><div class="name">${it.name}${it.tag?`<span class="tag">${it.tag}</span>`:''}</div>
       <div class="desc">${it.desc}</div>
       <div class="foot"><span class="price num">${p}</span><span class="ctl" data-ctl="${it.id}"></span></div></div></div>`;
@@ -843,14 +843,14 @@ function openItem(id){
   const it=ITEMS[id]; dState={id,size:it.sizes?it.sizes[0][0]:null,opts:[],adds:[],qty:1};
   const opts=OPT[it.opt]||[], adds=ADD[it.add]||[];
   const pairs=(PAIR[it.sec]||[]).map(k=>ITEMS[k]).filter(Boolean);
-  $('#itemBody').innerHTML=`<div class="dimg"><img src="https://cdn.jsdelivr.net/gh/qwdfegthikkcom-create/swalf-menu@layali-mosul/img/${it.img}.webp" alt="${it.name}"></div>
+  $('#itemBody').innerHTML=`<div class="dimg"><img src="img/${it.img}.webp" alt="${it.name}"></div>
     <h3 id="itemTitle">${it.name}</h3><p class="sub">${it.desc}</p>
     ${it.sizes?`<div class="optlabel">الحجم</div><div class="chips">${it.sizes.map((s,i)=>`<button class="chip" type="button" data-size="${s[0]}" aria-pressed="${i===0}">${s[0]}<span class="p num">${fmt(s[1])}</span></button>`).join('')}</div>`:''}
     ${adds.length?`<div class="optlabel">إضافات</div><div class="chips">${adds.map(a=>`<button class="chip" type="button" data-addon="${a[0]}" aria-pressed="false">${a[0]}<span class="p num">+${new Intl.NumberFormat('en-US').format(a[1])}</span></button>`).join('')}</div>`:''}
     ${opts.length?`<div class="optlabel">تعديلات على الطلب</div><div class="chips">${opts.map(o=>`<button class="chip" type="button" data-opt="${o}" aria-pressed="false">${o}</button>`).join('')}</div>`:''}
     <div class="drow"><span class="stepper"><button type="button" data-dq="-1" aria-label="إنقاص">−</button><span class="q num" id="dq">1</span><button type="button" data-dq="1" aria-label="زيادة">+</button></span>
       <button class="primary" type="button" id="dAdd"><span>أضف للطلب</span><span class="num" id="dPrice"></span></button></div>
-    ${pairs.length?`<div class="optlabel">يطلع زين وياه</div><div class="pairs">${pairs.map(p=>`<button class="pair" type="button" data-pair="${p.id}">${p.img?`<img src="https://cdn.jsdelivr.net/gh/qwdfegthikkcom-create/swalf-menu@layali-mosul/img/${p.img}.webp" alt="">`:`<span class="pi">☕</span>`}<span><b>${p.name}</b><small class="num">${fmt(p.sizes?p.sizes[0][1]:p.price)}</small></span><span class="pp" aria-hidden="true">+</span></button>`).join('')}</div>`:''}`;
+    ${pairs.length?`<div class="optlabel">يطلع زين وياه</div><div class="pairs">${pairs.map(p=>`<button class="pair" type="button" data-pair="${p.id}">${p.img?`<img src="img/${p.img}.webp" alt="">`:`<span class="pi">☕</span>`}<span><b>${p.name}</b><small class="num">${fmt(p.sizes?p.sizes[0][1]:p.price)}</small></span><span class="pp" aria-hidden="true">+</span></button>`).join('')}</div>`:''}`;
   updD(); show('itemSheet');
 }
 function updD(){ const u=lineUnit(dState); $('#dq').textContent=dState.qty; $('#dPrice').textContent=fmt(u*dState.qty); }
@@ -881,7 +881,7 @@ function renderCart(err){
   $('#cartBody').innerHTML=`<h3 id="cartTitle">طلبك</h3>
     <div class="tblrow"><span>${table?`الطلب على <b>الطاولة ${table}</b>`:'لم تختر رقم الطاولة'}</span><button type="button" id="chgTable">${table?'تغيير':'اختر الطاولة'}</button></div>
     ${cart.map((l,i)=>{const it=ITEMS[l.id];const ex=extraTxt(l).join(' · ');
-      return `<div class="line">${it.img?`<img src="https://cdn.jsdelivr.net/gh/qwdfegthikkcom-create/swalf-menu@layali-mosul/img/${it.img}.webp" alt="">`:`<span class="ico">ل</span>`}<div class="li"><b>${it.name}</b>${ex?`<small>${ex}</small>`:''}<span class="lp num">${fmt(lineUnit(l)*l.qty)}</span></div>
+      return `<div class="line">${it.img?`<img src="img/${it.img}.webp" alt="">`:`<span class="ico">ل</span>`}<div class="li"><b>${it.name}</b>${ex?`<small>${ex}</small>`:''}<span class="lp num">${fmt(lineUnit(l)*l.qty)}</span></div>
         <span class="stepper"><button type="button" data-ld="${i}" aria-label="إنقاص">−</button><span class="q num">${l.qty}</span><button type="button" data-li="${i}" aria-label="زيادة">+</button></span></div>`}).join('')}
     <div class="optlabel">ملاحظة للمطبخ</div>
     <textarea id="kitchenNote" placeholder="مثلاً: اللحم مستوي زين، والخبز حار">${esc(note)}</textarea>
