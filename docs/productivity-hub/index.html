@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Productivity Hub - أدوات إنتاجية متكاملة: قائمة مهام، مؤقت بومودورو، ملاحظات، تتبع العادات">
+  <title>Productivity Hub | أدوات الإنتاجية</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxx" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <h1 class="logo">&#9889; Productivity Hub</h1>
+      <nav class="tabs" id="tabNav">
+        <button class="tab-btn active" data-tab="todo">&#9745; المهام</button>
+        <button class="tab-btn" data-tab="pomodoro">&#9201; المؤقت</button>
+        <button class="tab-btn" data-tab="notes">&#128221; الملاحظات</button>
+        <button class="tab-btn" data-tab="habits">&#127919; العادات</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Ad Banner Top -->
+    <div class="ad-banner">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-xxxxxxxxxxxxxx"
+           data-ad-slot="xxxxxxxxxx"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- ====== To-Do Tab ====== -->
+    <section id="tab-todo" class="tab-content active">
+      <div class="card">
+        <h2>&#9745; قائمة المهام</h2>
+        <div class="input-row">
+          <input type="text" id="todoInput" placeholder="أكتب مهمة جديدة..." maxlength="200" />
+          <select id="todoPriority">
+            <option value="medium">متوسط</option>
+            <option value="high">عالي</option>
+            <option value="low">منخفض</option>
+          </select>
+          <button id="todoAddBtn" class="btn-primary">&#65291; إضافة</button>
+        </div>
+        <div id="todoList" class="todo-list"></div>
+      </div>
+    </section>
+
+    <!-- ====== Pomodoro Tab ====== -->
+    <section id="tab-pomodoro" class="tab-content">
+      <div class="card pomodoro-card">
+        <h2>&#9201; مؤقت بومودورو</h2>
+        <div class="pomodoro-display">
+          <div class="pomodoro-timer" id="pomodoroDisplay">25:00</div>
+          <div class="pomodoro-label" id="pomodoroLabel">وقت العمل</div>
+        </div>
+        <div class="pomodoro-controls">
+          <button id="pomodoroStartBtn" class="btn-primary">&#9654; بدء</button>
+          <button id="pomodoroPauseBtn" class="btn-secondary">&#9208; إيقاف</button>
+          <button id="pomodoroResetBtn" class="btn-secondary">&#8635; إعادة</button>
+        </div>
+        <div class="pomodoro-settings">
+          <label>العمل: <input type="number" id="pomodoroWork" value="25" min="1" max="90" /> دقيقة</label>
+          <label>الراحة: <input type="number" id="pomodoroBreak" value="5" min="1" max="30" /> دقيقة</label>
+          <button id="pomodoroApplyBtn" class="btn-small">تطبيق</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== Notes Tab ====== -->
+    <section id="tab-notes" class="tab-content">
+      <div class="card">
+        <h2>&#128221; الملاحظات</h2>
+        <div class="input-row">
+          <input type="text" id="noteTitleInput" placeholder="عنوان الملاحظة..." maxlength="100" />
+          <button id="noteAddBtn" class="btn-primary">&#65291; إضافة</button>
+        </div>
+        <textarea id="noteContentInput" placeholder="أكتب محتوى الملاحظة هنا..." rows="4"></textarea>
+        <div id="notesList" class="notes-list"></div>
+      </div>
+    </section>
+
+    <!-- ====== Habits Tab ====== -->
+    <section id="tab-habits" class="tab-content">
+      <div class="card">
+        <h2>&#127919; تتبع العادات</h2>
+        <div class="input-row">
+          <input type="text" id="habitInput" placeholder="أكتب عادة جديدة..." maxlength="100" />
+          <button id="habitAddBtn" class="btn-primary">&#65291; إضافة</button>
+        </div>
+        <div class="habit-stats" id="habitStats"></div>
+        <div id="habitsList" class="habits-list"></div>
+      </div>
+    </section>
+
+    <!-- Ad Banner Bottom -->
+    <div class="ad-banner">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-xxxxxxxxxxxxxx"
+           data-ad-slot="xxxxxxxxxx"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Productivity Hub &mdash; أدوات إنتاجية مجانية</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
