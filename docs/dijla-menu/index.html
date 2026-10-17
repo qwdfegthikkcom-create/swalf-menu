@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0e2c35">
+<title>مطعم دجلة · المنيو (نموذج عرض)</title>
+<meta name="description" content="منيو رقمي تجريبي لمطعم دجلة: اطلب من طاولتك ويصل الطلب إلى الكاشير مباشرة. نموذج عرض من واجهة، والأسعار تجريبية.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/readex-pro-arabic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/reem-kufi-arabic-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/dijla.css">
+<style>
+.skip{position:absolute;inset-inline-start:1rem;top:-4rem;background:var(--river);color:var(--paper);padding:.6rem 1rem;border-radius:10px;z-index:80;text-decoration:none;font-weight:600}
+.skip:focus{top:1rem}
+
+/* الواجهة */
+.hero{background:var(--river);color:var(--paper);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:auto 0 .4rem;height:1.6rem;background:var(--wave) repeat-x 0 0/40px 8px,var(--wave) repeat-x 20px 12px/40px 8px;opacity:.3}
+.hero-in{position:relative;max-width:46rem;margin:auto;padding:1.8rem 1rem 3rem;text-align:center;display:grid;justify-items:center;gap:.55rem}
+.hero .logo b{font-size:3.1rem;color:#fff}
+.tagline{color:var(--foam);font-size:.95rem}
+.where{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:.5rem}
+.table-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .9rem;border-radius:999px;border:1.5px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:#fff;font-weight:600;min-height:2.5rem}
+.table-chip:hover{border-color:var(--brass)}
+.table-chip span{color:var(--brass-l);font-weight:400;font-size:.85rem}
+.service{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:.35rem}
+.service .btn{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.22)}
+.service .btn:hover{border-color:var(--brass)}
+.service .btn.done{background:var(--ok);border-color:var(--ok)}
+
+/* طلباتي */
+.mine{max-width:46rem;margin:1rem auto 0;padding:0 1rem}
+.mine h2{font-size:1.15rem;margin-bottom:.6rem}
+.track{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);margin-bottom:.75rem}
+.track-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem}
+.track-top b{font-size:1.1rem}
+.steps{list-style:none;padding:0;margin:.9rem 0 .4rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem;counter-reset:s}
+.steps li{position:relative;text-align:center;font-size:.78rem;color:var(--muted);padding-top:1.7rem}
+.steps li::before{content:"";position:absolute;top:.35rem;inset-inline:0;height:4px;border-radius:4px;background:var(--line)}
+.steps li.on{color:var(--river);font-weight:600}
+.steps li.on::before{background:var(--brass)}
+.steps li.now::after{content:"";position:absolute;top:0;inset-inline-start:calc(50% - .45rem);width:.9rem;height:.9rem;border-radius:50%;background:var(--brass);box-shadow:0 0 0 4px var(--brass-l);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(241,223,192,.4)}}
+.track-msg{font-size:.9rem;color:var(--muted)}
+.track-lines{font-size:.85rem;color:var(--muted);margin-top:.35rem}
+
+/* أقسام المنيو */
+.cats{position:sticky;top:0;z-index:30;background:rgba(246,239,226,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.cats-in{max-width:46rem;margin:auto;display:flex;align-items:center;gap:.5rem;padding:.6rem 1rem}
+.cat-list{display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;flex:1;padding:.1rem}
+.cat-list::-webkit-scrollbar{display:none}
+.cat-list a{flex:none;padding:.4rem .9rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:.9rem;color:var(--river-2);border:1.5px solid var(--line);background:var(--paper);white-space:nowrap}
+.cat-list a[aria-current="true"]{background:var(--river);border-color:var(--river);color:#fff}
+.search-btn{flex:none;width:2.6rem;height:2.6rem;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);display:grid;place-items:center}
+.search-btn svg{width:1.1rem;height:1.1rem}
+.search{max-width:46rem;margin:auto;padding:0 1rem .7rem}
+.search input{width:100%;padding:.65rem 1rem;border-radius:12px;border:1.5px solid var(--line);background:var(--paper)}
+.search input:focus{outline:none;border-color:var(--brass)}
+
+main{max-width:46rem;margin:auto;padding:.5rem 1rem 7rem}
+.cat{padding-top:1.5rem}
+.cat-head{display:flex;align-items:baseline;gap:.75rem;margin-bottom:.2rem}
+.cat-head h2{font:600 1.5rem/1.4 var(--head);color:var(--river)}
+.cat-head::after{content:"";flex:1;height:8px;background:var(--wave) repeat-x center/20px 8px;opacity:.6}
+.cat-note{color:var(--muted);font-size:.88rem;margin-bottom:.6rem}
+.items{display:grid;gap:.65rem}
+.item{display:grid;grid-template-columns:1fr auto;gap:.75rem;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:.9rem 1rem}
+.item h3{font:600 1.05rem/1.4 var(--body);display:flex;flex-wrap:wrap;align-items:center;gap:.4rem}
+.item .desc{color:var(--muted);font-size:.86rem;margin-top:.15rem}
+.item .price{margin-top:.35rem;color:var(--brass-d)}
+.item.in-cart{border-color:var(--brass);box-shadow:inset 3px 0 0 var(--brass)}
+.item.soldout{opacity:.62}
+.item.soldout .price{text-decoration:line-through;color:var(--muted)}
+.add{min-width:5.5rem}
+.empty{text-align:center;color:var(--muted);padding:2rem 0}
+
+footer{max-width:46rem;margin:auto;padding:1.5rem 1rem 8rem;text-align:center;color:var(--muted);font-size:.85rem;display:grid;gap:.5rem;justify-items:center}
+footer a{font-weight:600;color:var(--river-2)}
+
+/* شريط السلة */
+.cartbar{position:fixed;inset-inline:0;bottom:0;z-index:40;padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom));background:linear-gradient(transparent,rgba(246,239,226,.96) 35%)}
+.cartbar button{display:flex;align-items:center;justify-content:space-between;gap:.75rem;width:100%;max-width:34rem;margin:auto;min-height:3.4rem;padding:.5rem .6rem .5rem 1.1rem;border:0;border-radius:999px;background:var(--river);color:#fff;box-shadow:0 8px 24px rgba(14,44,53,.35);font-weight:600}
+.cartbar .count{display:grid;place-items:center;min-width:2.2rem;height:2.2rem;border-radius:999px;background:var(--brass);font-size:.95rem}
+.cartbar .lbl{flex:1;text-align:start}
+
+/* السلة */
+.line{display:grid;grid-template-columns:1fr auto;gap:.3rem .75rem;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.line:last-child{border-bottom:0}
+.line-name{font-weight:600}
+.line-sub{color:var(--muted);font-size:.85rem}
+.line-note{grid-column:1/-1}
+.line-note input,.field textarea,.field select{width:100%;padding:.55rem .8rem;border:1.5px solid var(--line);border-radius:10px;background:#fff;font-size:.9rem}
+.line-note input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--brass)}
+.link-btn{background:none;border:0;padding:0;color:var(--river-3);font-size:.85rem;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.line.bad{background:var(--bad-l);margin:0 -1.25rem;padding-inline:1.25rem}
+.field{display:grid;gap:.35rem;margin-top:1rem}
+.field label,.field legend{font-weight:600;font-size:.92rem}
+.field textarea{min-height:4.2rem;resize:vertical}
+.total{display:flex;justify-content:space-between;align-items:baseline;font-weight:600;font-size:1.1rem}
+.fine{color:var(--muted);font-size:.8rem;text-align:center}
+
+/* اختيار الطاولة */
+.tables{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem}
+.tables button{aspect-ratio:1;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-weight:600;font-size:1.05rem}
+.tables button[aria-pressed="true"]{background:var(--river);color:#fff;border-color:var(--river)}
+.takeaway{margin-top:.75rem}
+
+@media (min-width:40rem){.items{grid-template-columns:1fr 1fr}.hero-in{padding:2.6rem 1rem 3.4rem}}
+</style>
+</head>
+<body>
+<a class="skip" href="#menu">تخطَّ إلى المنيو</a>
+<p class="demo-ribbon">نموذج عرض من «واجهة» · الأصناف والأسعار تجريبية</p>
+
+<header class="hero">
+  <div class="hero-in">
+    <h1 class="logo"><b>دجلة</b></h1>
+    <p class="tagline">مطعم مأكولات عراقية</p>
+    <div class="where">
+      <button class="table-chip" id="table-btn" type="button"></button>
+    </div>
+    <div class="service" id="service" hidden>
+      <button class="btn btn-sm" type="button" data-req="waiter">نادِ النادل</button>
+      <button class="btn btn-sm" type="button" data-req="bill">اطلب الحساب</button>
+    </div>
+  </div>
+</header>
+
+<section class="mine" id="mine" hidden aria-labelledby="mine-h">
+  <h2 id="mine-h">طلباتي</h2>
+  <div id="mine-list" aria-live="polite"></div>
+</section>
+
+<nav class="cats" aria-label="أقسام المنيو">
+  <div class="cats-in">
+    <div class="cat-list" id="cat-list"></div>
+    <button class="search-btn" id="search-btn" type="button" aria-expanded="false" aria-controls="search" aria-label="ابحث في المنيو">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    </button>
+  </div>
+  <div class="search" id="search" hidden>
+    <label class="sr" for="q">ابحث عن صنف</label>
+    <input id="q" type="search" placeholder="ابحث عن صنف، مثلاً: كباب" autocomplete="off">
+  </div>
+</nav>
+
+<main id="menu" tabindex="-1"></main>
+
+<footer>
+  <p>اطلب من طاولتك، ويصل طلبك إلى الكاشير مباشرة.</p>
+  <p>منيو تجريبي صمّمه <a href="https://wa.me/9647747800611?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%B1%D8%A3%D9%8A%D8%AA%20%D9%86%D9%85%D9%88%D8%B0%D8%AC%20%D9%85%D9%86%D9%8A%D9%88%20%D8%AF%D8%AC%D9%84%D8%A9%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D9%85%D9%86%D9%8A%D9%88%20%D9%85%D8%AB%D9%84%D9%87%20%D9%84%D9%85%D8%B7%D8%B9%D9%85%D9%8A." target="_blank" rel="noopener">واجهة ✦ <span lang="en">Wajha Studio</span><span class="sr"> (واتساب، يُفتح في نافذة جديدة)</span></a></p>
+  <p><a href="cashier.html">شاشة الكاشير</a></p>
+</footer>
+
+<div class="cartbar" id="cartbar" hidden>
+  <button type="button" id="open-cart" aria-haspopup="dialog">
+    <span class="count" id="cart-count"></span>
+    <span class="lbl">عرض الطلب</span>
+    <span class="price" id="cart-total"></span>
+  </button>
+</div>
+
+<dialog id="cart" aria-labelledby="cart-h">
+  <form class="sheet" method="dialog" id="cart-form">
+    <div class="sheet-head">
+      <h2 id="cart-h">طلبك</h2>
+      <button class="x" value="close" formnovalidate aria-label="إغلاق">×</button>
+    </div>
+    <div class="sheet-body">
+      <div id="cart-lines"></div>
+      <div class="field" id="place-field">
+        <label for="place">مكان الطلب</label>
+        <select id="place" required></select>
+      </div>
+      <div class="field">
+        <label for="order-note">ملاحظة للطلب كله <span class="line-sub">(اختياري)</span></label>
+        <textarea id="order-note" maxlength="200" placeholder="مثلاً: نريد الأكل مع بعض"></textarea>
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <div class="total"><span>المجموع</span><span class="price" id="sheet-total"></span></div>
+      <button class="btn btn-brass btn-block" id="send" type="button">أرسل الطلب إلى الكاشير</button>
+      <p class="fine">الدفع عند الكاشير بعد الأكل.</p>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="table-dlg" aria-labelledby="table-h">
+  <form class="sheet" method="dialog">
+    <div class="sheet-head">
+      <h2 id="table-h">أين تجلس؟</h2>
+      <button class="x" value="close" aria-label="إغلاق">×</button>
+    </div>
+    <div class="sheet-body">
+      <p class="line-sub" style="margin-bottom:.8rem">رقم الطاولة مكتوب على رمز QR فوقها.</p>
+      <div class="tables" id="tables" role="group" aria-label="رقم الطاولة"></div>
+      <button class="btn btn-ghost btn-block takeaway" type="button" id="pick-takeaway" aria-pressed="false">سفري (أستلم الطلب من الكاشير)</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/menu.js"></script>
+<script src="assets/backend.js"></script>
+<script src="assets/customer.js"></script>
+</body>
+</html>

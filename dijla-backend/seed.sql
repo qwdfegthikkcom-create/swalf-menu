@@ -1,0 +1,31 @@
+-- مولَّد من docs/dijla-menu/assets/menu.js بـ seed.cjs، لا تعدّله باليد.
+insert into dijla.items (id, cat, name, price, sort) values
+  ('masgouf', 'house', 'سمك مسگوف', 25000, 1),
+  ('quzi', 'house', 'قوزي على تمن', 18000, 2),
+  ('dolma', 'house', 'دولمة عراقية', 12000, 3),
+  ('tashreeb', 'house', 'تشريب لحم', 10000, 4),
+  ('biryani', 'house', 'برياني عراقي', 9000, 5),
+  ('kebab', 'grill', 'كباب عراقي', 9000, 6),
+  ('tikka-lahm', 'grill', 'تكة لحم', 11000, 7),
+  ('tikka-dajaj', 'grill', 'تكة دجاج', 8000, 8),
+  ('half-chicken', 'grill', 'نص دجاجة مشوية', 9000, 9),
+  ('mix-grill', 'grill', 'مشكل مشاوي', 22000, 10),
+  ('kubba-mosul', 'starters', 'كبة موصلية', 6000, 11),
+  ('kubba-halab', 'starters', 'كبة حلب', 5000, 12),
+  ('adas', 'starters', 'شوربة عدس', 2500, 13),
+  ('hummus', 'starters', 'حمص بالطحينة', 3000, 14),
+  ('mutabbal', 'starters', 'متبل باذنجان', 3000, 15),
+  ('tabbouleh', 'starters', 'تبولة', 3500, 16),
+  ('fattoush', 'starters', 'فتوش', 3500, 17),
+  ('mann-alsama', 'sweets', 'من السما', 4000, 18),
+  ('kunafa', 'sweets', 'كنافة', 4000, 19),
+  ('zunud', 'sweets', 'زنود الست', 4000, 20),
+  ('muhallabi', 'sweets', 'محلبي', 2500, 21),
+  ('chai', 'drinks', 'شاي عراقي', 500, 22),
+  ('laban', 'drinks', 'لبن', 1000, 23),
+  ('orange', 'drinks', 'عصير برتقال', 3000, 24),
+  ('lemon-mint', 'drinks', 'ليمون بالنعناع', 3000, 25),
+  ('soda', 'drinks', 'مشروب غازي', 1000, 26),
+  ('water', 'drinks', 'ماء', 500, 27)
+on conflict (id) do update set cat = excluded.cat, name = excluded.name, price = excluded.price, sort = excluded.sort;
+delete from dijla.items where id not in ('masgouf', 'quzi', 'dolma', 'tashreeb', 'biryani', 'kebab', 'tikka-lahm', 'tikka-dajaj', 'half-chicken', 'mix-grill', 'kubba-mosul', 'kubba-halab', 'adas', 'hummus', 'mutabbal', 'tabbouleh', 'fattoush', 'mann-alsama', 'kunafa', 'zunud', 'muhallabi', 'chai', 'laban', 'orange', 'lemon-mint', 'soda', 'water');
