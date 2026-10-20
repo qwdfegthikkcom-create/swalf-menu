@@ -4,9 +4,9 @@
    - 'local': تجربة على جهاز واحد (المتصفح نفسه): الطلبات تُحفظ في المتصفح وتتزامن بين نوافذه.
    الواجهتان لا تعرفان أي وضع يعمل: كلاهما يستدعي الدوال نفسها هنا. */
 window.DIJLA_CONFIG = window.DIJLA_CONFIG || {
-  mode: 'local',
-  url: 'https://vheyvovzqvlqhmkmpylz.supabase.co',
-  key: 'sb_publishable_-wIbxz0XApxFvcbcuESJmw_vcf5QLnQ'
+  mode: 'cloud',
+  url: 'https://rnmpoampazbcxijcbcfl.supabase.co',
+  key: 'sb_publishable_juwE1iYg5aLfHQDSbE_Kgw_W9Nl-BKW'
 };
 
 (function () {
@@ -112,7 +112,7 @@ window.DIJLA_CONFIG = window.DIJLA_CONFIG || {
     };
   }
   var local = {
-    mode: 'local',
+    mode: 'cloud',
     menu: op(function () { return menuState(load()); }),
     placeOrder: op(function (o) { var db = load(); var r = createOrder(db, o, 'customer'); save(db); return r; }),
     orderStatus: op(function (tokens) {

@@ -119,10 +119,6 @@ begin
     raise exception 'busy';
   end if;
 
-  -- تنظيف: النموذج يحتفظ بالطلبات ثلاثة أيام فقط.
-  delete from dijla.orders where created_at < now() - interval '3 days';
-  delete from dijla.requests where created_at < now() - interval '3 days';
-
   -- رقم الطلب اليومي (يبدأ من 1 كل يوم).
   perform pg_advisory_xact_lock(hashtext('dijla.order_no'));
   select coalesce(max(no), 0) + 1 into v_no from dijla.orders where created_at >= dijla.today_start();
@@ -221,15 +217,13 @@ begin
     insert into dijla.login_fails default values;
     return jsonb_build_object('error', 'pin');
   end if;
-  delete from dijla.sessions where expires_at < now();
-  delete from dijla.login_fails where at < now() - interval '1 day';
   insert into dijla.sessions default values returning token into v_token;
   return jsonb_build_object('session', v_token);
 end $$;
 
 create or replace function public.dijla_logout(p_session uuid) returns void
 language sql security definer set search_path = '' as $$
-  delete from dijla.sessions where token = p_session;
+  update dijla.sessions set expires_at = now() where token = p_session;
 $$;
 
 -- كل ما تحتاجه شاشة الكاشير: طلبات اليوم، والنداءات المفتوحة، والأصناف.
@@ -305,7 +299,7 @@ begin
   if p_pin !~ '^[0-9]{4,8}$' then raise exception 'pin must be 4-8 digits'; end if;
   insert into dijla.settings (k, v) values ('pin_hash', extensions.crypt(p_pin, extensions.gen_salt('bf')))
   on conflict (k) do update set v = excluded.v;
-  delete from dijla.sessions;
+  update dijla.sessions set expires_at = now() where expires_at > now();
 end $$;
 
 -- الصلاحيات: الزوار ينفذون دوال الزبون والكاشير (المحمية بالجلسة) فقط.
