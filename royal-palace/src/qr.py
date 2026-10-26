@@ -1,9 +1,9 @@
-"""Build royal-palace/qr/index.html (QR cards for the menu + 24 tables).
-Needs: pip install segno pillow   (add --png to also write high-res PNGs to qr/png/)
+"""Build docs/royal-palace/qr/index.html (QR cards for the menu + 24 tables).
+Needs: pip install segno pillow   (add --png to also write high-res PNGs to docs/royal-palace/qr/png/)
 Run:  python3 royal-palace/src/qr.py [--png]
 """
 import segno, json, base64, io, os, sys
-HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(HERE)
+HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.join(os.path.dirname(os.path.dirname(HERE)),'docs','royal-palace')  # GitHub Pages serves /docs
 BASE='https://qwdfegthikkcom-create.github.io/swalf-menu/royal-palace/'   # change if the menu moves
 d=json.load(open(os.path.join(HERE,'images.json'),encoding='utf-8'))
 items=[('menu',BASE)]+[('table-%02d'%n,BASE+'?table=%d'%n) for n in range(1,25)]

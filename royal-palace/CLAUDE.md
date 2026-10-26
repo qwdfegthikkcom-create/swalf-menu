@@ -8,12 +8,12 @@ Reply to him in Iraqi Arabic, short and direct.
 |---|---|
 | `src/template.html` | **Edit this.** Whole app (menu + cashier) in one file. Images are placeholders `%%IMG:logo%%`, `%%IMG:hero%%`, `%%IMGMAP%%`. |
 | `src/images.json` | All photos as base64 data URIs (logo, hero, 23 dishes). Keys = item ids in `ITEMS`. |
-| `src/build.py` | `python3 royal-palace/src/build.py` → writes `index.html`. |
-| `src/qr.py` | `python3 royal-palace/src/qr.py [--png]` → writes `qr/index.html` (needs `pip install segno pillow`). |
-| `index.html` | Built output – the live menu. Never hand-edit; rebuild. |
-| `qr/index.html` | Built QR cards page (1 general code + 24 table codes). |
+| `src/build.py` | `python3 royal-palace/src/build.py` → writes `docs/royal-palace/index.html`. |
+| `src/qr.py` | `python3 royal-palace/src/qr.py [--png]` → writes `docs/royal-palace/qr/index.html` (needs `pip install segno pillow`). |
+| `../docs/royal-palace/index.html` | Built output – the live menu. Never hand-edit; rebuild. |
+| `../docs/royal-palace/qr/index.html` | Built QR cards page (1 general code + 24 table codes). |
 
-Live (GitHub Pages, branch `main`, root):
+Live (GitHub Pages serves the repo's **`/docs` folder** on `main` – outputs must go to `docs/`):
 - Menu: https://qwdfegthikkcom-create.github.io/swalf-menu/royal-palace/
 - Table link: `…/royal-palace/?table=7` (also `#t7`) opens straight to that table.
 - QR page: https://qwdfegthikkcom-create.github.io/swalf-menu/royal-palace/qr/
